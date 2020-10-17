@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/big_number_fragment"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/big_number"
+        android:layout_width="wrap_content"
+        android:textSize="90sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:text="0"/>
+</RelativeLayout>
