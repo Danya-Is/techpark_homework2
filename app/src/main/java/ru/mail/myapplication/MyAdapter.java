@@ -38,7 +38,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         Log.d("MyAdapter", "onBindViewHolder with position " + position);
         int number = nums.get(position);
-        holder.num.setText("" + number);
+        holder.num.setText(String.valueOf(number));
 
         int color = Color.RED;
         if (number % 2 != 0 ){
@@ -63,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
     public void addItem(){
         nums.add(nums.size() + 1);
-        this.notifyDataSetChanged();
+        this.notifyItemInserted(nums.size() - 1);
     }
 
     @Override

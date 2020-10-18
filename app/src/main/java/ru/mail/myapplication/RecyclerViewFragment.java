@@ -26,6 +26,9 @@ public class RecyclerViewFragment extends Fragment {
         int spanCount = getResources().getInteger(R.integer.column_count);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), spanCount));
         int count = 100;
+        if (savedInstanceState != null){
+            count = savedInstanceState.getInt("count");
+        }
         adapter = new MyAdapter(getActivity().getSupportFragmentManager(), count);
         recyclerView.setAdapter(adapter);
 
