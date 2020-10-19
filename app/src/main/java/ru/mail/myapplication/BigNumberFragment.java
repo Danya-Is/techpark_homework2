@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.fragment.app.Fragment;
 
 public class BigNumberFragment extends Fragment {
 
     public TextView num;
+    private static final String KEY = "pos";
 
     @Nullable
     @Override
@@ -22,8 +22,9 @@ public class BigNumberFragment extends Fragment {
         View view = inflater.inflate(R.layout.big_number_fragment, container, false);
         num = view.findViewById(R.id.big_number);
         Bundle bundle = getArguments();
-        int number = bundle.getInt("pos");
+        int number = -1;
         if (bundle != null) {
+            number = bundle.getInt(KEY);
             num.setText(String.valueOf(number));
         }
         int color = Color.RED;

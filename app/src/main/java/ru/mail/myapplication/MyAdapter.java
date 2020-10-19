@@ -18,6 +18,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
 
     private List<Integer> nums;
     private FragmentManager fm;
+    private static final String KEY = "pos";
 
     public MyAdapter(FragmentManager fragmentManager, int count){
         nums = new ArrayList<>();
@@ -50,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
             public void onClick(View v) {
                 BigNumberFragment fragment = new BigNumberFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("pos", position + 1);
+                bundle.putInt(KEY, position + 1);
                 fragment.setArguments(bundle);
 
                 fm.beginTransaction()

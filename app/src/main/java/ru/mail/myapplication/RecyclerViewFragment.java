@@ -1,5 +1,6 @@
 package ru.mail.myapplication;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,12 +11,16 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.Objects;
 
 public class RecyclerViewFragment extends Fragment {
 
     private MyAdapter adapter;
+    private static final String KEY_COUNT = "count";
 
     @Nullable
     @Override
@@ -27,9 +32,10 @@ public class RecyclerViewFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), spanCount));
         int count = 100;
         if (savedInstanceState != null){
-            count = savedInstanceState.getInt("count");
+            count = savedInstanceState.getInt(KEY_COUNT);
         }
-        adapter = new MyAdapter(getActivity().getSupportFragmentManager(), count);
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        adapter = new MyAdapter(fm, count);
         recyclerView.setAdapter(adapter);
 
         Button btn = view.findViewById(R.id.addButton);
@@ -37,7 +43,6 @@ public class RecyclerViewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 adapter.addItem();
-                recyclerView.getLayoutManager().onItemsAdded(recyclerView, adapter.getItemCount(), adapter.getItemCount() + 1);
             }
         });
         return view;
@@ -46,7 +51,12 @@ public class RecyclerViewFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt("count", adapter.getItemCount());
+        if (adapter != null) {
+            outState.putInt(KEY_COUNT, adapter.getItemCount());
+        }
+        else{
+            outState.putInt(KEY_COUNT, 100);
+        }
         Log.d("RecyclerViewFragment", "OnSaveInstanceState");
     }
 }

@@ -24,14 +24,4 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
-    @Override
-    protected void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-    }
 }
