@@ -28,7 +28,7 @@ public class BigNumberFragment extends Fragment {
             num.setText(String.valueOf(number));
         }
         int color = Color.RED;
-        if (number % 2 != 0){
+        if (number % 2 != 0) {
             color = Color.BLUE;
         }
         num.setTextColor(color);

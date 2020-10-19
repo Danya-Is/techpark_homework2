@@ -1,5 +1,6 @@
 package ru.mail.myapplication;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,19 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
+public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     private List<Integer> nums;
-    private FragmentManager fm;
+    private Activity activity;
     private static final String KEY = "pos";
 
-    public MyAdapter(FragmentManager fragmentManager, int count){
+    public MyAdapter(Activity act, int count) {
         nums = new ArrayList<>();
-        fm = fragmentManager;
-        for (int i = 1; i <= count; i++){
+        activity = act;
+        for (int i = 1; i <= count; i++) {
             nums.add(i);
         }
     }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,27 +44,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder>{
         holder.num.setText(String.valueOf(number));
 
         int color = Color.RED;
-        if (number % 2 != 0 ){
+        if (number % 2 != 0) {
             color = Color.BLUE;
         }
         holder.num.setTextColor(color);
         holder.num.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BigNumberFragment fragment = new BigNumberFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(KEY, position + 1);
-                fragment.setArguments(bundle);
-
-                fm.beginTransaction()
-                        .replace(R.id.container, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                if (activity instanceof MainActivity) {
+                    ((MainActivity) activity).onNumberDisplayed(position + 1);
+                }
             }
         });
     }
 
-    public void addItem(){
+    public void addItem() {
         nums.add(nums.size() + 1);
         this.notifyItemInserted(nums.size() - 1);
     }

@@ -31,11 +31,10 @@ public class RecyclerViewFragment extends Fragment {
         int spanCount = getResources().getInteger(R.integer.column_count);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), spanCount));
         int count = 100;
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             count = savedInstanceState.getInt(KEY_COUNT);
         }
-        FragmentManager fm = getActivity().getSupportFragmentManager();
-        adapter = new MyAdapter(fm, count);
+        adapter = new MyAdapter(getActivity(), count);
         recyclerView.setAdapter(adapter);
 
         Button btn = view.findViewById(R.id.addButton);
@@ -53,8 +52,7 @@ public class RecyclerViewFragment extends Fragment {
         super.onSaveInstanceState(outState);
         if (adapter != null) {
             outState.putInt(KEY_COUNT, adapter.getItemCount());
-        }
-        else{
+        } else {
             outState.putInt(KEY_COUNT, 100);
         }
         Log.d("RecyclerViewFragment", "OnSaveInstanceState");
